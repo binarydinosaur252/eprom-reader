@@ -17,13 +17,23 @@ while(!Serial){} //waiting for serial connection
   }
 }
 
-void receive_byte(){ //receives 1 bit of data from each pin and creates a byte
+void put_address(uint8_t j)
+{
+  digitalWrite(30, HIGH && (j & B10000000));
+  digitalWrite(31, HIGH && (j & B01000000));
+  digitalWrite(32, HIGH && (j & B00100000));
+  digitalWrite(33, HIGH && (j & B00010000));
+  digitalWrite(34, HIGH && (j & B00001000));
+  digitalWrite(35, HIGH && (j & B00000100));
+  digitalWrite(36, HIGH && (j & B00000010));
+  digitalWrite(37, HIGH && (j & B00000001));
+}
 
+
+void receive_byte(){ //receives 1 bit of data from each pin and creates a byte
+  
   uint8_t incoming_byte;
-  uint8_t memory_addres;
   int i = 22;
-  int j = 30;
-  memory_addres = 0;
   
 while(i < 11){
   if(digitalRead(i) == HIGH){
@@ -37,8 +47,10 @@ Serial.println(incoming_byte,HEX);//prints incoming byte over serial
 
 
 void loop() {
+  int addr = 0x00;
+  put_address(addr);
   receive_byte(); //currently trys to receive data forever
   delay(50);
+  addr++;
 }
-
 
