@@ -1,4 +1,4 @@
-//Morris's 8bit (E(E(P)))ROM dumper, written in C++ with Arduino.h 
+//Cyrus's 8bit (E(E(P)))ROM dumper, written in C++ with Arduino.h 
 
 void setup(){
 Serial.begin(115200); //creating a 115200 baud serial connection
